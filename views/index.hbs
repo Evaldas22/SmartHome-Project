@@ -1,0 +1,118 @@
+<div class="container-fluid h-100" style="padding: 0;">
+    <div class="nav-side-menu">
+        <div class="brand">
+            <div class="options"><i class="fa fa-home"></i> SmartHome Bachelor <i id="edit"><i class="fa fa-pencil-square-o"  style='font-size: 1.5em;'></i></i></div>
+        </div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse show">
+
+                <li data-toggle="collapse" data-target="#sensors1" class="collapsed active">
+                    <a href="#">
+                        <i class="fa fa-lightbulb-o"></i> Lights
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <ul class="sub-menu collapse show" id="sensors1">
+                    {{!--
+                    <li class="lightsKitchen 1">
+                        <a href="#">
+                            <i class="fa fa-lightbulb-o"></i>Kitchen</a>
+                    </li>
+                    <li class="lightsDiningroom 2">
+                        <a href="#">
+                            <i class="fa fa-lightbulb-o"></i>Bathroom</a>
+                    </li>
+                    <li class="lightsBathroom 3">
+                        <a href="#">
+                            <i class="fa fa-lightbulb-o"></i>Bedroom</a>
+                    </li>
+                    <li class="lightsBedroom 4">
+                        <a href="#">
+                            <i class="fa fa-lightbulb-o"></i>Diningroom</a>
+                    </li>
+                    <li class="lightsLivingroom 5">
+                        <a href="#">
+                            <i class="fa fa-lightbulb-o"></i>Livingroom</a>
+                    </li> --}}
+
+                </ul>
+
+                <li data-toggle="collapse" data-target="#sensors2" class="collapsed">
+                    <a href="#">
+                        <i class="fa fa-cube"></i> Sensors
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <ul class="sub-menu collapse show" id="sensors2">
+
+                    {{!--
+                    <li class="active">
+                        <a href="#">
+                            <i class="fa fa-windows"></i>Windows sensor: OPEN</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-thermometer-full"></i>Temperature: 23&#8451;</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-tint"></i>Humidity: 53%</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-lock"></i>Door sensor: CLOSED</a>
+                    </li>
+                    --}}
+                </ul>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <div class="house-plan-cointainer">
+        <div class="row  align-items-center ">
+            <div class="col-sm-6 col-lg-9 mx-auto text-center nxs">
+                <img id="housePlan" src="/images/house_plan.png">
+
+                <div class="lightsKitchen 1 circle-text position0">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+                <div class="lightsDiningroom 2 circle-text position1">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+                <div class="lightsBathroom 3 circle-text position2">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+                <div class="lightsBedroom 4 circle-text position3">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+                <div class="lightsLivingroom 5 circle-text position4">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+
+                <div id="draggable3" class="circle-text draggable ui-widget-content">
+                    <div>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
