@@ -48,7 +48,7 @@ $(document).ready(function () {
             $('ul #sensors2 li').removeClass('EDIT');
 
             // Change text to EDIT
-            $('#edit').html("<i class='fa fa-pencil-square-o'  style='font-size: 1.5em;'></i>");
+            $('#edit').html("<i class='fa fa-pencil-square-o'></i>");
 
             // Remove plus sign
             $('#add').remove();
@@ -65,10 +65,10 @@ $(document).ready(function () {
             editActive = true;
 
             // change text EDIT to SAVE
-            $('#edit').html("<i class='fa fa-check-square-o' style='font-size: 1.5em; color:#7FFF00;'></i>");
+            $('#edit').html("<i id='save' class='fa fa-check-square-o' style='color:#50AE54;'></i>");
 
             // add plus sign
-            $('.options').append('<i id="add" style="font-size: 1.5em">+</i>');
+            $('.options').html('<i id="add" class="fa fa-plus"></i>');
 
             // add minus sign for remove
             $('.addRemove').append('<i class="fa fa-times remove" style="float: right; padding-top:3%; width: 10%;"></i>');
@@ -90,7 +90,7 @@ $(document).ready(function () {
                     <form style="padding: 2% 5% 2% 5%;">
                         <i class="fa fa-times-circle-o remove" style="font-size: 3em; color: red;"></i><br>
                         Name:<br>
-                        <input type="text" name="name" style="height: 100%;">
+                        <input type="text" name="name" style="width: 100%; height: 100%; border-radius: 5px;" placeholder="type new name...">
                         <br>
                         Group name:<br>
                         <select class="select">
