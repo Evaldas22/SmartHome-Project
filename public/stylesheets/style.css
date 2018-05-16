@@ -2,7 +2,7 @@ body {
   margin: 0px;
   padding: 0px;
   background: #fff;
-  height: 100vh !important;
+  height: 100vh;
   /* background: #181c20; */
 }
 /* Side menu */
@@ -230,6 +230,10 @@ body {
 
   /*MEDIA*/
   @media screen and (max-width: 1024px)  {
+    body {
+      height: 100vw;
+    }
+
     .nav-side-menu {
       position: relative;
       width: 100%;

@@ -10,21 +10,30 @@ $(document).ready(function () {
             // each edit form data
             $('.edit_form').each(function (index, val) {
                 obj = {};
-                obj['name'] = $(this).find('[name*="name"]').val()
+                obj['name'] = $(this).find('[name*="name"]').val();
+                obj['value'] = $(this).find('[name*="value"]').val();
                 obj['group_name'] = $(this).find('[class*="select"] :selected').val();
 
 
-                var id = $(this).prev('li')[0].classList[1];
-                if ($.isNumeric(id))
+                // var id = $(this).prev('li')[0].classList[1];
+                console.log($(this).prev('a'));
+                if($(this).prev('a')[0] !== undefined)
+                    var id = $(this).prev('a')[0].classList[1];
+                else
+                    var id = undefined;
+
+                // if ($.isNumeric(id))
                     obj['id'] = id;
 
+                    console.log(obj['id'] + ' ' + id);
+
                 // Update
-                if (obj.name !== '' && obj.group_name !== '' && obj.id !== undefined) {
+                if ((obj.name !== '' || obj.group_name !== '' || obj.value !== '') && obj.id) {
                     console.log('updated');
                     $.post("/lights/update/" + obj.id, obj);
                 }
                 // Add new
-                else if (obj.name !== '' && obj.group_name !== '') {
+                else if (obj.name !== '' && obj.group_name !== '' && obj.value !== '') {
                     console.log('added');
                     $.post("/addNew", obj);
                 }
@@ -46,6 +55,10 @@ $(document).ready(function () {
             // Remove classes EDIT from all li
             $('ul #sensors1 li').removeClass('EDIT');
             $('ul #sensors2 li').removeClass('EDIT');
+
+            $('.groupLights a').removeClass('EDIT'); // v2
+            $('.groupSensors a').removeClass('EDIT'); // v2
+
 
             // Change text to EDIT
             $('#edit').html("<i class='fa fa-pencil-square-o'></i>");
@@ -69,6 +82,8 @@ $(document).ready(function () {
 
             // add plus sign
             $('.options').html('<i id="add" class="fa fa-plus"></i>');
+            $('.addButton').css('display', 'block'); //v2
+
 
             // add minus sign for remove
             $('.addRemove').append('<i class="fa fa-times remove" style="float: right; padding-top:3%; width: 10%;"></i>');
@@ -81,6 +96,10 @@ $(document).ready(function () {
             $('ul #sensors1 li').addClass('EDIT');
             $('ul #sensors2 li').addClass('EDIT');
 
+            $('.groupLights a').addClass('EDIT'); // v2
+            $('.groupSensors a').addClass('EDIT'); // v2
+
+
             // Remove all classes EDIT click event
             $('.EDIT').off('click');
 
@@ -92,18 +111,21 @@ $(document).ready(function () {
                         Name:<br>
                         <input type="text" name="name" style="width: 100%; height: 100%; border-radius: 5px;" placeholder="type new name...">
                         <br>
+                        Value:<br>
+                        <input type="text" name="value" style="height: 100%;">
+                        <br>
                         Group name:<br>
                         <select class="select">
                         `
-                        $.getJSON("/groups", function (data) {
-                            var opt = `<option value=''></option>`;
-                            $.each(data, function (key, val) {
-                                //console.log(val.group_name);
-                                opt += `<option value='` + val.group_name + `'>` + val.group_name + `</option>`;
-                            });
-                            $('.select').html(opt);
-                        });
-                        `
+            $.getJSON("/groups", function (data) {
+                var opt = `<option value=''></option>`;
+                $.each(data, function (key, val) {
+                    //console.log(val.group_name);
+                    opt += `<option value='` + val.group_name + `'>` + val.group_name + `</option>`;
+                });
+                $('.select').html(opt);
+            });
+            `
                         </select>
                     </form>
                 </div>`;
@@ -119,19 +141,10 @@ $(document).ready(function () {
                 console.log(id);
                 var name = $(this).next().find('[name="name"]').val();
                 console.log(name)
+                var value = $(this).next().find('[name="value"]').val();
+                console.log(value)
                 var selected = $(this).next().find('.select :selected').text();
                 console.log(selected);
-
-                // OLD UPDATED METHOD FOR LIGHTS
-                // if (name === '' && selected === '') {
-
-                // }
-                // else {
-                //     console.log('UPDATE' + id + ' ' + name + ' ' + selected);
-                //     var update = $.post("/lights/update/" + id, { name: name, group_name: selected });
-                //     name = $(this).next().find('[name="name"]').val('');
-                //     selected = $(this).next().find('.select').val('');
-                // }
 
             });
 
@@ -141,17 +154,18 @@ $(document).ready(function () {
                 console.log("add");
 
                 // add new row form
-                var newForm = `
-                <li class="addNew" style="background-color: #32CD32	;">
-                    <a href="#">
-                        <i class="fa fa-th-large"></i> Add new
-                    </a>
-                    <i class="fa fa-times"></i>
-                </li>
+                var newForm = `<div class="group">
+                <div class="addNew groupName" style="background-color: #53AD58;">
+                    <i class="fa fa-plus-circle"></i> Add new
+                </div>
                 <div class="edit_form" style="display: true;">
                     <form style="padding: 2% 5% 2% 5%;">
+                    <i class="fa fa-times-circle-o remove" style="font-size: 3em; color: red;"></i><br>
                         Name:<br>
-                        <input type="text" name="nameAdd" style="height: 100%;">
+                        <input type="text" name="name" style="height: 100%;">
+                        <br>
+                        Value:<br>
+                        <input type="text" name="value" style="height: 100%;">
                         <br>
                         Group name:<br>
                         <select class="selectAdd">
@@ -167,16 +181,21 @@ $(document).ready(function () {
                 `
                         </select>
                     </form>
-                </div>`;
+                </div></div>`;
 
-                $('[data-target="#sensors1"]').before(newForm);
+                // add form
+                $('.navHeader').after(newForm);
 
+                $('.remove').click(function () {
+                    $(this).parent().parent().parent().remove();
+                    console.log($(this).parent().parent().parent());
+                });
             });
 
             $('.remove').click(function () {
-                var id = $(this).parent().parent().prev('li')[0].classList[1];
-                $.post("/delete", {id: id});
-                $(this).parent().parent().prev('li').remove();
+                var id = $(this).parent().parent().prev('a')[0].classList[1];
+                $.post("/delete", { id: id });
+                $(this).parent().parent().prev('a').remove();
                 $(this).parent().parent().remove();
                 console.log(id);
             });

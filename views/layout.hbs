@@ -13,7 +13,10 @@
         crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{!--
+    <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
+    <link rel='stylesheet' href='/stylesheets/css.css' />
+    <link rel='stylesheet' href='/stylesheets/toggleButton.css' />
 </head>
 
 <body>
@@ -28,7 +31,10 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/lights_control.js"></script>
-     <script src="/javascripts/edit_mode.js"></script>
+    <script src="/javascripts/edit_mode.js"></script>
+    <script src="/javascripts/responsiveCoord.js"></script>
+    
+
 
 
 
@@ -48,6 +54,7 @@
                 localStorage.positions = JSON.stringify(positions)
             }
         });
+        $('img[usemap]').rwdImageMaps();
     </script>
 </body>
 

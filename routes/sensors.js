@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
   
 });
 
-/* GET light with id. */
+/* GET sensor with id. */
 router.get('/:id', function (req, res, next) {
   db.all("SELECT * FROM things WHERE id=" + req.params.id, function (err, row) {
     res.send(row);

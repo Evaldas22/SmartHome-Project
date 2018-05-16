@@ -12,7 +12,7 @@ var db = new sqlite3.Database(databaseDir);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'SmartHome Bachelor' });
+  res.render('i2', { title: 'SmartHome Bachelor' });
 });
 
 
