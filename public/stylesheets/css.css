@@ -15,6 +15,7 @@ html {
 body {
     margin: 0;
     background: #fff;
+    /* background-color: var(--bgColor); */
 }
 
 
@@ -119,6 +120,9 @@ body {
 .sideNav .main-nav .group div a i{
    margin: auto 10px;
 }
+.sideNav .main-nav .group div a div{
+    display: inline-block;
+ }
 .activeLight{ 
     background-color: #ffe63e !important;
     color: #27282A !important;
@@ -134,12 +138,14 @@ background-color: #fddf1c !important;
 .container {
     color: black;
     margin: auto auto;
-    padding: 0px 10px;
+    padding: 10px 10px;
     display: grid;
+    grid-gap: 5px;
+    background-color: white;
+    border-radius: 10px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     text-align: center;
-    background-color: transparent;
 } 
 
 .container .homeImage {
@@ -149,10 +155,10 @@ background-color: #fddf1c !important;
 }
 
 .container .homeImage > img {   
-    /* width: 50vw; */
+    width: 50vw;
     height: auto;
     max-width: 100%;
-    width: 50vw;
+    padding: 0px 40px;
 }
 .container div{
     margin: auto auto;
@@ -161,6 +167,7 @@ background-color: #fddf1c !important;
     font-size: 1.5em;
     color:white;
     padding: 10px 30px;
+    margin: 0;
     border-radius: 10px;
     background-color: var(--bgColor);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -194,6 +201,9 @@ div.absolute {
     background-color: var(--bgColor);
     opacity: 0.5;
 }
+div.absolute:hover {
+    background-color: var(--hoverColor);
+}
 div.absolute div.planText {
     position: absolute;
     top: 50%; left: 0; bottom: 0; right: 0;
@@ -209,6 +219,79 @@ div.absolute div.planText {
     .sideNav {
         width: 100vw;
     }
+
+    /* HOME PLAN HIDE */
+    .container {
+        display: none;
+    }
+
+        /* GROUP */
+    .sideNav .main-nav .group{
+        display: grid;
+        grid-template-rows: 1fr;
+        overflow: scroll;
+        background-color: var(--bgColor);
+    }
+
+    .sideNav .main-nav .group .groupName{
+        padding: 10px;
+        text-align: left !important;
+        background-color: rgb(40, 159, 233);
+    }
+
+    .sideNav .main-nav .group div.groupLights{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+     }
+     .sideNav .main-nav .group div.groupSensors{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+     }
+
+    .sideNav .main-nav .group div a{
+        display: inline-block;
+        padding: 30px 30px;
+        margin: 5px;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+        border: 1px solid black;
+        background-color: var(--bgColor);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .sideNav .main-nav .group  a:hover{
+        text-decoration: none;
+        color: white;
+        background-color: var(--hoverColor);
+    }
+
+    .sideNav .main-nav .group a:before {
+        display: none;
+    }
+
+    .sideNav .main-nav .group div a i{
+        display: block;
+        margin: auto 5px;
+        text-align: center;
+    
+    }
+    .activeLight{ 
+        background-color: #ffe63e !important;
+        color: #27282A !important;
+    }
+
+    .activeLight:hover{ 
+        background-color: #fddf1c !important;
+    }
+
+    label.switch {
+        margin: 0;
+        margin-left: 20px;
+
+    }
+    /* GROUP END */
+
+
 }
 
 @media screen and (min-width: 800px) {

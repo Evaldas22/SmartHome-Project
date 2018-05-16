@@ -65,21 +65,43 @@ $(document).ready(function () {
     // ***********************SENSORS*******************************
     function getSensors() {
         $.getJSON("/sensors", function (data) {
-            var li = ``;
+
             var a = ``;
+            
             $.each(data, function (key, val) {
                
                 val.name = val.name.replace(' ', '');
 
             if(val.value === 'ON' || val.value === 'OFF'){
-                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default;"><i class="fa fa-rss"></i>` + val.name + `: ` + val.value;
-                a += `<label class="switch"><input type="checkbox"`
+                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default;"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value;
+                a += `</div><label class="switch"><input type="checkbox"`
                 if(val.value === 'ON')  a+=`checked`
                 a +=`><span class="slider round"></span></label>`+ `</a>`;
             }
+            else if(val.name.includes('Temperature') || val.name.includes('temperature')) {
+                if(val.value < 20)
+                        bgColor = "background-color: #F1C75A";
+                    if(val.value < 30 && val.value > 20)
+                        bgColor = "background-color: #F5814C";
+                    if(val.value > 30)
+                        bgColor = "background-color: #EF5052";
+                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default; `+bgColor+`"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value + `</div></a>`;
+            }
+            else if(val.name.includes('Humidity') || val.name.includes('humidity')) {
+                if(val.value < 40)
+                        bgColor = "background-color: #4693C4";
+                    if(val.value < 60 && val.value > 40)
+                        bgColor = "background-color: #2660A6";
+                    if(val.value > 60)
+                        bgColor = "background-color: #10539A";
+                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default; `+bgColor+`"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value + `</div></a>`;
+            }
             else
-                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default;"><i class="fa fa-rss"></i>` + val.name + `: ` + val.value + `</a>`;
+                a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default;"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value + `</div></a>`;
                 
+
+
+
                 if(val.name === "Temperature"){
                     if(val.value < 20)
                         $('.temp').css('background-color', '#F1C75A');
@@ -102,7 +124,6 @@ $(document).ready(function () {
                 }
             })
 
-            $('ul #sensors2').html(li);
             $('div.groupSensors').html(a);
 
         }).always(function () {
@@ -121,6 +142,7 @@ $(document).ready(function () {
                     var update_off = $.post("/sensors/update", { id: this.closest('a').classList[1] });
                     getSensors();
                 }
+
             });
 
 
