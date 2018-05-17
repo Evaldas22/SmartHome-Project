@@ -21,6 +21,10 @@ $(document).ready(function () {
                     activeLight = ' activeLight';
                     $("[class*='" + val.name + "']").addClass("activeLight");
                 }
+                else if (val.value === "OFF") {
+                    $("[class*='lights" + val.name + "']").removeClass("activeLight");
+                    
+                }
 
                 li += `
                 <li class="lights`+ val.name + ` ` + val.id + activeLight + `">
