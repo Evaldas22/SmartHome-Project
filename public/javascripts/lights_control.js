@@ -10,7 +10,6 @@ $(document).ready(function () {
     function getLights() {
         // get lights list and display if ON
         $.getJSON("/lights", function (data) {
-            var li = ``;
             var a = ``;
             $("[class*='light']").off("click");
             $.each(data, function (key, val) {
@@ -26,19 +25,13 @@ $(document).ready(function () {
                     
                 }
 
-                li += `
-                <li class="lights`+ val.name + ` ` + val.id + activeLight + `">
-                    <a href="javascript:;">
-                        <i class="fa fa-lightbulb-o"></i>`+ val.name + `
-                    </a>
-                </li>`;
-
                 a += `<a href="javascript:;" class="lights` + val.name + ` ` + val.id + activeLight + `"><i class="fa fa-lightbulb-o"></i>` + val.name + `</a>`;
             })
-
-            $('ul #sensors1').html(li);
+            if(a.length !== 0)
             $('div.groupLights').html(a);
 
+        }).fail( function(d, textStatus, error) {
+            console.error("getJSON failed, status: " + textStatus + ", error: "+error)
         }).always(function () {
             // LIGHTS CONTROL
             //console.log('Lights response: ');
@@ -127,9 +120,11 @@ $(document).ready(function () {
                     $('#humVal1').html(val.value);
                 }
             })
-
+            if(a.length !== 0)
             $('div.groupSensors').html(a);
 
+        }).fail( function(d, textStatus, error) {
+            console.error("getJSON failed, status: " + textStatus + ", error: "+error)
         }).always(function () {
 
             $("[class*='slider']").click(function () {

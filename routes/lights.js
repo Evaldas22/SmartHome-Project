@@ -17,6 +17,7 @@ router.get('/', function (req, res, next) {
       db.serialize(function () {
         db.each("SELECT * FROM things WHERE group_name='lights'", function (err, row) {
           item = {}
+          
           item["id"] = row.id;
           item["name"] = row.name;
           item["value"] = row.value;
@@ -24,6 +25,7 @@ router.get('/', function (req, res, next) {
           item["updated_at"] = row.updated_at;
 
           jsonObj.push(item);
+          
           //console.log("id: " + row.id + " name: " + row.name + " state: " + row.state + " created_at: " + row.created_at);
         },
           function (err, rows) {
