@@ -16,8 +16,9 @@ router.get('/', function (req, res, next) {
     if (db !== false) {
       db.serialize(function () {
         db.each("SELECT * FROM things WHERE group_name='lights'", function (err, row) {
+
+          if(!row) return;
           item = {}
-          
           item["id"] = row.id;
           item["name"] = row.name;
           item["value"] = row.value;

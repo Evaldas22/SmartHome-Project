@@ -13,6 +13,7 @@ global.jsonObj = [];
 /* GET lights listing. */
 router.get('/', function (req, res, next) {
   db.each("SELECT * FROM things WHERE group_name='sensors'", function (err, row) {
+    if(!row) return;
     item = {}
     item["id"] = row.id;
     item["name"] = row.name;
