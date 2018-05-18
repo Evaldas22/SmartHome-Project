@@ -12,6 +12,7 @@ $(document).ready(function () {
                 obj = {};
                 obj['name'] = $(this).find('[name*="name"]').val();
                 obj['value'] = $(this).find('[name*="value"]').val();
+                obj['device'] = $(this).find('[name*="device"]').val();
                 obj['group_name'] = $(this).find('[class*="select"] :selected').val();
 
 
@@ -28,12 +29,12 @@ $(document).ready(function () {
                     console.log(obj['id'] + ' ' + id);
 
                 // Update
-                if ((obj.name !== '' || obj.group_name !== '' || obj.value !== '') && obj.id) {
+                if ((obj.name !== '' || obj.group_name !== '' || obj.value !== '' || obj.device !== '') && obj.id) {
                     console.log('updated');
                     $.post("/lights/update/" + obj.id, obj);
                 }
                 // Add new
-                else if (obj.name !== '' && obj.group_name !== '' && obj.value !== '') {
+                else if (obj.name !== '' && obj.group_name !== '' && obj.value !== '' && obj.device !== '') {
                     console.log('added');
                     $.post("/addNew", obj);
                 }
@@ -114,6 +115,9 @@ $(document).ready(function () {
                         Value:<br>
                         <input type="text" name="value" style="height: 100%;">
                         <br>
+                        Device number:<br>
+                        <input type="number" name="device" style="height: 100%;">
+                        <br>
                         Group name:<br>
                         <select class="select">
                         `
@@ -143,6 +147,8 @@ $(document).ready(function () {
                 console.log(name)
                 var value = $(this).next().find('[name="value"]').val();
                 console.log(value)
+                var device = $(this).next().find('[name="device"]').val();
+                console.log(device)
                 var selected = $(this).next().find('.select :selected').text();
                 console.log(selected);
 
@@ -166,6 +172,9 @@ $(document).ready(function () {
                         <br>
                         Value:<br>
                         <input type="text" name="value" style="height: 100%;">
+                        <br>
+                        Device number:<br>
+                        <input type="number" name="device" style="height: 100%;">
                         <br>
                         Group name:<br>
                         <select class="selectAdd">

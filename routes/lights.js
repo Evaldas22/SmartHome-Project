@@ -70,33 +70,52 @@ router.post('/update/:id', function (req, res) {
   var upd_id = req.params.id;
   var name = req.body.name;
   var value = req.body.value;
+  var device = req.body.device;
   var group_name = req.body.group_name;
 
   db.serialize(function () {
     db.each("SELECT name, value, group_name FROM things WHERE id=" + upd_id, function (err, row) {
       if (row) {
-        if ((name !== row.name || group_name !== row.group_name || value !== row.value) && (name || group_name || value)) {
+        if ((name !== row.name || group_name !== row.group_name || value !== row.value || device !== row.device) && (name || group_name || value || device)) {
 
           var updtStr = "UPDATE things SET ";
 
-          if (name && group_name && value)
-            updtStr += "name = '" + name + "', group_name = '" + group_name + "', value = '" + value + "', ";
-          else if (name && group_name)
-            updtStr += "name = '" + name + "', group_name = '" + group_name + "', ";
-          else if (group_name && value)
-            updtStr += "group_name = '" + group_name + "', value = '" + value + "', ";
-          else if (name && value)
-            updtStr += "name = '" + name + "', value = '" + value + "', ";
-          else if (name)
+          // if (name && group_name && value && device)
+          //   updtStr += "name = '" + name + "', group_name = '" + group_name + "', value = '" + value + "', device = '" + device + "', ";
+          // else if (name && group_name)
+          //   updtStr += "name = '" + name + "', group_name = '" + group_name + "', ";
+          // else if (group_name && value)
+          //   updtStr += "group_name = '" + group_name + "', value = '" + value + "', ";
+          // else if (name && value)
+          //   updtStr += "name = '" + name + "', value = '" + value + "', ";
+          // else if (name && device)
+          //   updtStr += "name = '" + name + "', device = '" + device + "', ";
+          // else if (group_name && device)
+          //   updtStr += "group_name = '" + group_name + "', device = '" + device + "', ";
+          // else if (device && value)
+          //   updtStr += "device = '" + device + "', value = '" + value + "', ";
+
+          // else if (name)
+          //   updtStr += "name = '" + name + "', ";
+          // else if (group_name)
+          //   updtStr += "group_name = '" + group_name + "', ";
+          // else if (value)
+          //   updtStr += "value = '" + value + "', ";
+          // else if (device)
+          //   updtStr += "device = '" + device + "', ";
+          
+          if (name)
             updtStr += "name = '" + name + "', ";
-          else if (group_name)
+          if (group_name)
             updtStr += "group_name = '" + group_name + "', ";
-          else if (value)
-          updtStr += "value = '" + value + "', ";
+          if (value)
+            updtStr += "value = '" + value + "', ";
+          if (device)
+            updtStr += "device = '" + device + "', ";
 
           //res.send("ANSWER: " + updtStr);
           db.run(updtStr + "updated_at = datetime('now','localtime') WHERE id = " + upd_id);
-          res.send("Updated: id: " + upd_id + " Room_name: " + name + " Group_name: " + group_name + " value: " + value);
+          res.send("Updated: id: " + upd_id + " Room_name: " + name + " Group_name: " + group_name + " value: " + value + "device: " + device);
         }
         else {
           res.send("No name or group_name was givenn");

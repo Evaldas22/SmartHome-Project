@@ -36,14 +36,15 @@ router.get('/groups', function (req, res, next) {
 router.post('/addNew', function (req, res, next) {
   var name = req.body.name;
   var value = req.body.value;
+  var device = req.body.device;
   var group_name = req.body.group_name;
 
     if(name && group_name){
-      db.run("INSERT into things(name, group_name, value) VALUES ('"+name+"','"+group_name+"', '"+value+"')");
-      res.send("Inserted thing with name: " + name + ' with group_name: ' + group_name) + ' value: ' + value;
+      db.run("INSERT into things(name, group_name, value, device) VALUES ('"+name+"','"+group_name+"', '"+value+"', "+device+")");
+      res.send("Inserted thing with name: " + name + ' with group_name: ' + group_name) + ' value: ' + value + 'device: ' + device;
     }
     else 
-     res.send("Name or group not givenn");
+     res.send("Name or value or device or group not givenn");
 
 });
 
