@@ -4,8 +4,8 @@ var db = new sqlite3.Database('../db/IoT.db');
 db.serialize(function () {
 
     // Create database
-    db.run('CREATE TABLE IF NOT EXISTS things(id INTEGER PRIMARY KEY, name TEXT  NULL, group_name TEXT NULL, value TEXT NULL, device TEXT NULL, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
-    db.run('CREATE TABLE IF NOT EXISTS thingsTemp(id INTEGER PRIMARY KEY, name TEXT NULL, group_name TEXT NULL, value TEXT NULL, device TEXT NULL,updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE IF NOT EXISTS things(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT  NULL, group_name TEXT NULL, value TEXT NULL, device TEXT NULL, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE IF NOT EXISTS thingsTemp(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NULL, group_name TEXT NULL, value TEXT NULL, device TEXT NULL,updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
 
     // Insert into database
     var stmt = db.prepare("INSERT INTO things(name, group_name, value, device) VALUES (?, ?, ?, ?)");
@@ -16,7 +16,7 @@ db.serialize(function () {
         var name = rooms[i];
         var value = "OFF";
         var group_name = "lights";
-        var device = "test";
+        var device = "16";
         stmt.run(name, group_name, value, device);
     }
     for (var i = 0; i < 3; i++) {
@@ -25,7 +25,7 @@ db.serialize(function () {
         var name = sensors[i];
         var value = "22";
         var group_name = "sensors";
-        var device = "TEST";
+        var device = "16";
         stmt.run(name, group_name, value, device);
     }
 
