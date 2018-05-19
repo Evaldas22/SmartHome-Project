@@ -123,6 +123,11 @@ body {
 .sideNav .main-nav .group div a div{
     display: inline-block;
  }
+
+.notResponded{
+    
+}
+
 .activeLight{ 
     background-color: #ffe63e !important;
     color: #27282A !important;

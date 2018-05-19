@@ -19,10 +19,15 @@ $(document).ready(function () {
                 if (val.value === "ON") {
                     activeLight = ' activeLight';
                     $("[class*='" + val.name + "']").addClass("activeLight");
+                    $("[class*='lights" + val.name + "']").css('background-color', '27282A').addClass('lights' + val.name + ' ' + val.id);
                 }
                 else if (val.value === "OFF") {
                     $("[class*='lights" + val.name + "']").removeClass("activeLight");
-                    
+                    $("[class*='lights" + val.name + "']").css('background-color', '27282A').addClass('lights' + val.name + ' ' + val.id);
+                }
+                else if(val.value === "Not Responded") {
+                    $("[class*='lights" + val.name + "']").css('background-color', 'red').removeClass('lights' + val.name + ' ' + val.id);
+                    return true;
                 }
 
                 a += `<a href="javascript:;" class="lights` + val.name + ` ` + val.id + activeLight + `"><i class="fa fa-lightbulb-o"></i>` + val.name + `</a>`;
