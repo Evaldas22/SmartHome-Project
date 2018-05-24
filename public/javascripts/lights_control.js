@@ -25,7 +25,7 @@ $(document).ready(function () {
                     $("[class*='lights" + val.name + "']").removeClass("activeLight");
                     $("[class*='lights" + val.name + "']").css('background-color', '27282A').addClass('lights' + val.name + ' ' + val.id);
                 }
-                else if(val.value === "Not Responded") {
+                else if(val.value === "Not responded") {
                     $("[class*='lights" + val.name + "']").css('background-color', 'red').removeClass('lights' + val.name + ' ' + val.id);
                     return true;
                 }
@@ -81,20 +81,20 @@ $(document).ready(function () {
                 a +=`><span class="slider round"></span></label>`+ `</a>`;
             }
             else if(val.name.includes('Temperature') || val.name.includes('temperature')) {
-                if(val.value < 20)
+                if(val.value <= 20)
                         bgColor = "background-color: #F1C75A";
                     if(val.value < 30 && val.value > 20)
                         bgColor = "background-color: #F5814C";
-                    if(val.value > 30)
+                    if(val.value >= 30)
                         bgColor = "background-color: #EF5052";
                 a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default; `+bgColor+`"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value + `</div></a>`;
             }
             else if(val.name.includes('Humidity') || val.name.includes('humidity')) {
-                if(val.value < 40)
+                if(val.value <= 40)
                         bgColor = "background-color: #4693C4";
                     if(val.value < 60 && val.value > 40)
                         bgColor = "background-color: #2660A6";
-                    if(val.value > 60)
+                    if(val.value >= 60)
                         bgColor = "background-color: #10539A";
                 a += `<a href='javascript:;' class="sensors` + val.name + ` ` + val.id + `" style="cursor:default; `+bgColor+`"><i class="fa fa-rss"></i><div class="valName">` + val.name + `: </div><div class="valValue">` + val.value + `</div></a>`;
             }
